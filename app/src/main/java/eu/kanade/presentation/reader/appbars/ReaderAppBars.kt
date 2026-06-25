@@ -82,12 +82,12 @@ fun ReaderAppBars(
             exit = slideOutVertically(readerBarsSlideAnimationSpec) { -it } + fadeOut(readerBarsFadeAnimationSpec),
         ) {
             ReaderTopBar(
-                modifier = Modifier
-                    .background(backgroundColor)
-                    .clickable(onClick = onClickTopAppBar),
+                modifier = Modifier,
                 mangaTitle = mangaTitle,
                 chapterTitle = chapterTitle,
                 navigateUp = navigateUp,
+                onClickTopAppBar = onClickTopAppBar,
+                backgroundColor = backgroundColor,
                 bookmarked = bookmarked,
                 onToggleBookmarked = onToggleBookmarked,
                 onOpenInWebView = onOpenInWebView,
@@ -113,10 +113,6 @@ fun ReaderAppBars(
                             Spacer(modifier = Modifier.width(MaterialTheme.padding.small))
                             ChapterNavigator(
                                 type = chapterNavigatorType,
-                                onNextChapter = onNextChapter,
-                                enabledNext = enabledNext,
-                                onPreviousChapter = onPreviousChapter,
-                                enabledPrevious = enabledPrevious,
                                 currentPage = currentPage,
                                 totalPages = totalPages,
                                 onPageIndexChange = onPageIndexChange,
@@ -135,14 +131,13 @@ fun ReaderAppBars(
             enter = slideInVertically(readerBarsSlideAnimationSpec) { it } + fadeIn(readerBarsFadeAnimationSpec),
             exit = slideOutVertically(readerBarsSlideAnimationSpec) { it } + fadeOut(readerBarsFadeAnimationSpec),
         ) {
-            Column(verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small)) {
+            Column(
+                modifier = Modifier.padding(bottom = MaterialTheme.padding.small),
+                verticalArrangement = Arrangement.spacedBy(MaterialTheme.padding.small),
+            ) {
                 if (chapterNavigatorType.isHorizontal()) {
                     ChapterNavigator(
                         type = chapterNavigatorType,
-                        onNextChapter = onNextChapter,
-                        enabledNext = enabledNext,
-                        onPreviousChapter = onPreviousChapter,
-                        enabledPrevious = enabledPrevious,
                         currentPage = currentPage,
                         totalPages = totalPages,
                         onPageIndexChange = onPageIndexChange,
@@ -151,9 +146,13 @@ fun ReaderAppBars(
                 ReaderBottomBar(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .background(backgroundColor)
                         .padding(horizontal = MaterialTheme.padding.small)
                         .windowInsetsPadding(WindowInsets.navigationBars),
+                    chapterNavigatorType = chapterNavigatorType,
+                    onNextChapter = onNextChapter,
+                    enabledNext = enabledNext,
+                    onPreviousChapter = onPreviousChapter,
+                    enabledPrevious = enabledPrevious,
                     readingMode = readingMode,
                     onClickReadingMode = onClickReadingMode,
                     orientation = orientation,
@@ -161,6 +160,7 @@ fun ReaderAppBars(
                     cropEnabled = cropEnabled,
                     onClickCropBorder = onClickCropBorder,
                     onClickSettings = onClickSettings,
+                    backgroundColor = backgroundColor,
                 )
             }
         }

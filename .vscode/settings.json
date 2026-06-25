@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.kt": "kotlin",
+    "*.kts": "kotlin"
+  },
+  "editor.formatOnSave": false,
+  "chat.tools.terminal.autoApprove": {
+    ".\\gradlew.bat": true
+},
+"java.configuration.updateBuildConfiguration": "interactive"
+}
